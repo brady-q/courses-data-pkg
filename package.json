@@ -5,13 +5,11 @@
   "files": [
     "courses_data_bg.wasm",
     "courses_data.js",
-    "courses_data_bg.js",
     "courses_data.d.ts"
   ],
   "main": "courses_data.js",
   "types": "courses_data.d.ts",
   "sideEffects": [
-    "./courses_data.js",
     "./snippets/*"
   ]
 }
