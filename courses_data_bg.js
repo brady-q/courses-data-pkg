@@ -4,21 +4,6 @@ export function __wbg_set_wasm(val) {
 }
 
 
-function addToExternrefTable0(obj) {
-    const idx = wasm.__externref_table_alloc();
-    wasm.__wbindgen_export_2.set(idx, obj);
-    return idx;
-}
-
-function handleError(f, args) {
-    try {
-        return f.apply(this, args);
-    } catch (e) {
-        const idx = addToExternrefTable0(e);
-        wasm.__wbindgen_exn_store(idx);
-    }
-}
-
 let cachedUint8ArrayMemory0 = null;
 
 function getUint8ArrayMemory0() {
@@ -47,6 +32,21 @@ function decodeText(ptr, len) {
 function getStringFromWasm0(ptr, len) {
     ptr = ptr >>> 0;
     return decodeText(ptr, len);
+}
+
+function addToExternrefTable0(obj) {
+    const idx = wasm.__externref_table_alloc();
+    wasm.__wbindgen_externrefs.set(idx, obj);
+    return idx;
+}
+
+function handleError(f, args) {
+    try {
+        return f.apply(this, args);
+    } catch (e) {
+        const idx = addToExternrefTable0(e);
+        wasm.__wbindgen_exn_store(idx);
+    }
 }
 
 function isLikeNone(x) {
@@ -121,7 +121,7 @@ function getArrayJsValueFromWasm0(ptr, len) {
     const mem = getDataViewMemory0();
     const result = [];
     for (let i = ptr; i < ptr + 4 * len; i += 4) {
-        result.push(wasm.__wbindgen_export_2.get(mem.getUint32(i, true)));
+        result.push(wasm.__wbindgen_externrefs.get(mem.getUint32(i, true)));
     }
     wasm.__externref_drop_slice(ptr, len);
     return result;
@@ -178,12 +178,21 @@ export class SearchEngine {
 }
 if (Symbol.dispose) SearchEngine.prototype[Symbol.dispose] = SearchEngine.prototype.free;
 
-export function __wbg_call_13410aac570ffff7() { return handleError(function (arg0, arg1) {
+export function __wbg___wbindgen_is_undefined_2d472862bd29a478(arg0) {
+    const ret = arg0 === undefined;
+    return ret;
+};
+
+export function __wbg___wbindgen_throw_b855445ff6a94295(arg0, arg1) {
+    throw new Error(getStringFromWasm0(arg0, arg1));
+};
+
+export function __wbg_call_e762c39fa8ea36bf() { return handleError(function (arg0, arg1) {
     const ret = arg0.call(arg1);
     return ret;
 }, arguments) };
 
-export function __wbg_newnoargs_254190557c45b4ec(arg0, arg1) {
+export function __wbg_new_no_args_ee98eee5275000a4(arg0, arg1) {
     const ret = new Function(getStringFromWasm0(arg0, arg1));
     return ret;
 };
@@ -198,33 +207,24 @@ export function __wbg_performance_7a3ffd0b17f663ad(arg0) {
     return ret;
 };
 
-export function __wbg_static_accessor_GLOBAL_8921f820c2ce3f12() {
+export function __wbg_static_accessor_GLOBAL_89e1d9ac6a1b250e() {
     const ret = typeof global === 'undefined' ? null : global;
     return isLikeNone(ret) ? 0 : addToExternrefTable0(ret);
 };
 
-export function __wbg_static_accessor_GLOBAL_THIS_f0a4409105898184() {
+export function __wbg_static_accessor_GLOBAL_THIS_8b530f326a9e48ac() {
     const ret = typeof globalThis === 'undefined' ? null : globalThis;
     return isLikeNone(ret) ? 0 : addToExternrefTable0(ret);
 };
 
-export function __wbg_static_accessor_SELF_995b214ae681ff99() {
+export function __wbg_static_accessor_SELF_6fdf4b64710cc91b() {
     const ret = typeof self === 'undefined' ? null : self;
     return isLikeNone(ret) ? 0 : addToExternrefTable0(ret);
 };
 
-export function __wbg_static_accessor_WINDOW_cde3890479c675ea() {
+export function __wbg_static_accessor_WINDOW_b45bfc5a37f6cfa2() {
     const ret = typeof window === 'undefined' ? null : window;
     return isLikeNone(ret) ? 0 : addToExternrefTable0(ret);
-};
-
-export function __wbg_wbindgenisundefined_c4b71d073b92f3c5(arg0) {
-    const ret = arg0 === undefined;
-    return ret;
-};
-
-export function __wbg_wbindgenthrow_451ec1a8469d7eb6(arg0, arg1) {
-    throw new Error(getStringFromWasm0(arg0, arg1));
 };
 
 export function __wbindgen_cast_2241b6af4c4b2941(arg0, arg1) {
@@ -234,7 +234,7 @@ export function __wbindgen_cast_2241b6af4c4b2941(arg0, arg1) {
 };
 
 export function __wbindgen_init_externref_table() {
-    const table = wasm.__wbindgen_export_2;
+    const table = wasm.__wbindgen_externrefs;
     const offset = table.grow(4);
     table.set(0, undefined);
     table.set(offset + 0, undefined);
