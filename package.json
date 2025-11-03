@@ -1,5 +1,6 @@
 {
   "name": "courses-data",
+  "type": "module",
   "version": "0.1.0",
   "files": [
     "courses_data_bg.wasm",
@@ -7,5 +8,8 @@
     "courses_data.d.ts"
   ],
   "main": "courses_data.js",
-  "types": "courses_data.d.ts"
+  "types": "courses_data.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
 }
